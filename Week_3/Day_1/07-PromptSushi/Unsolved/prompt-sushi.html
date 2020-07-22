@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sushi Prompt - Unsolved</title>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+
+      var confirmSteak = confirm("Do you eat Steak?");
+      var confirmAge = prompt("What's your birth year?");
+      var currentYear = new Date().getFullYear();
+      var drinkAge = (currentYear- confirmAge);
+     
+
+      if(confirmSteak){
+        alert("Here's is a Steak Sandwich!");
+      } else {
+        alert("Here's a Tofu Stir-Fry!");
+      }
+
+      if(drinkAge < 21) {
+        alert("No Sake for you");
+      }
+
+    </script>
+
+  </body>
+</html>
