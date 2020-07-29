@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>jQuery Calculator</title>
+  <meta charset="UTF-8">
+  <title>jQuery Calculator</title>
 
-    <!-- Added link to the jQuery Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Added link to the jQuery Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Added a link to Bootstrap-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Added a link to Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <!-- Added a link to our external stylesheet-->
-    <link rel="stylesheet" href="style.css">
+  <!-- Added a link to our external stylesheet-->
+  <link rel="stylesheet" href="style.css">
 
 </head>
+
 <body>
 
-<!-- Jumbotron for Title -->
-<div class="jumbotron">
+  <!-- Jumbotron for Title -->
+  <div class="jumbotron">
     <h1 class="text-center">jQuery Calculator</h1>
     <h3 class="text-center">Perform basic mathematic operations using the power of jQuery!</h3>
-</div>
+  </div>
 
-<div class="container">
+  <div class="container">
 
     <div class="row">
 
@@ -35,22 +37,22 @@
             <button id="button-1" class="btn btn-primary number" value="1"><span>1</span></button>
             <button id="button-2" class="btn btn-primary number" value="2"><span>2</span></button>
             <button id="button-3" class="btn btn-primary number" value="3"><span>3</span></button>
-            <button id="button-plus" class="btn btn-danger operator" value="plus"><span>+</span></button>
+            <button id="button-plus" class="btn btn-danger operator" value="+"><span>+</span></button>
             <br><br>
             <button id="button-4" class="btn btn-primary number" value="4"><span>4</span></button>
             <button id="button-5" class="btn btn-primary number" value="5"><span>5</span></button>
             <button id="button-6" class="btn btn-primary number" value="6"><span>6</span></button>
-            <button id="button-minus" class="btn btn-danger operator" value="minus"><span>&minus;</span></button>
+            <button id="button-minus" class="btn btn-danger operator" value="-"><span>&minus;</span></button>
             <br><br>
             <button id="button-7" class="btn btn-primary number" value="7"><span>7</span></button>
             <button id="button-8" class="btn btn-primary number" value="8"><span>8</span></button>
             <button id="button-9" class="btn btn-primary number" value="9"><span>9</span></button>
-            <button id="button-multiply" class="btn btn-danger operator" value="times"><span>&times;</span></button>
+            <button id="button-multiply" class="btn btn-danger operator" value="*"><span>&times;</span></button>
             <br><br>
             <button id="button-0" class="btn btn-primary number" value="0"><span>0</span></button>
-            <button id="button-divide" class="btn btn-danger operator" value="divide"><span>&divide;</span></button>
-            <button id="button-power" class="btn btn-danger operator" value="power"><span>^</span></button>
-            <button id="button-equal" class="btn btn-success equal" value="equals"><span>=</span></button>
+            <button id="button-divide" class="btn btn-danger operator" value="/"><span>&divide;</span></button>
+            <button id="button-power" class="btn btn-danger operator" value="^"><span>^</span></button>
+            <button id="button-equal" class="btn btn-success equal" value="="><span>=</span></button>
             <br><br>
             <button id="button-clear" class="btn btn-dark clear" value="clear"><span>clear</span></button>
           </div>
@@ -73,16 +75,102 @@
     </div>
   </div>
 
-<script type="text/javascript">
+  <script type="text/javascript">
 
-$(document).ready(function() {
+    $(document).ready(function () {
 
-// Your code here...
+      // Your code here...
+      //each time a button is pressed we get the button ID and value and add it to the firstValue string.
+      // if statements to check operator.
+      // if the plus, minus, multiply, divide, or power to buttons are pressed we stop the string value and create add the new values to another string.
+      //add event listen when for the equal button itself and show the result in our results card.
+      //add event listener for Clear button to clear all and start over. 
+
+      // if a number button is not pressed do nothing.**
+
+      // if the clear button is pressed at after number buttons are pressed clear proccess and start over.**
 
 
-});
+      // When a number button is press takes its value and add it to a string, keep doing this until an operators button is pressed. 
 
-</script>
+      //if the operator button is press twice update the operator to the recent one pressed. 
+
+
+      // when a number button is pressed after the operator button start to add the button values until either another operator button is pressed or until the equals button is pressed.
+
+      // if mutliple operators are press Add the first two values and  continue operation.
+
+      //when the equal button is press get each value added between operator pressed and run the results.
+      var firstValue = "";
+      var operation = "";
+      var secondValue = "";
+      // number press
+      $(".number").click(function (event) {
+        if ($('#result').text()) {
+          clear();
+        }
+
+        if (operation === "") {
+          firstValue += this.value;
+          console.log(firstValue);
+          $("#first-number").text(firstValue);
+
+        }
+
+        if (operation !== "") {
+          secondValue += this.value;
+          $("#second-number").text(secondValue);
+        }
+
+      });
+
+      $(".operator").click(function (event) {
+        operation = this.value;
+        $("#operator").text(operation);
+      });
+
+
+      $('.equal').click(function (event) {
+        if (firstValue && secondValue && operation) {
+          if (operation === "+"){
+            $('#result').text(+firstValue + +secondValue);
+          }
+          if (operation === "-"){
+            $('#result').text(+firstValue - +secondValue);
+          }
+          if (operation === "*"){
+            $('#result').text(+firstValue * +secondValue);
+          }
+          if (operation === "/"){
+            $('#result').text(+firstValue / +secondValue);
+          }
+          if (operation === "^"){
+            $('#result').text((+firstValue) ** +secondValue);
+          }
+          
+        }
+
+      })
+
+      let clear = function(event){
+        firstValue = ""
+        secondValue = ""
+        operation = ""
+        $("#first-number").empty();
+        $("#second-number").empty();
+        $("#operator").empty();
+        $('#result').empty();
+      };
+
+      $('.clear').click(clear);
+
+
+
+
+    });
+
+  </script>
 
 </body>
+
 </html>

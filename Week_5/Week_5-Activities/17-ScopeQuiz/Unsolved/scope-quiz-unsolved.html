@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>lexicalScope</title>
 </head>
+
 <body>
 
   <script type="text/javascript">
@@ -23,6 +25,7 @@
     }
 
     function b1() {
+      //myVar here is displaying 1 because it is b1() cannot access myvar withing a1()
       alert("Q1 | b: " + myVar1);
     }
     a1();
@@ -33,6 +36,8 @@
     var myVar2 = 1;
 
     function a2() {
+      // value of myVar was updated to 2 instead of 1
+      //declared myVar here
       var myVar2 = 5 - 3;
       b2();
       alert("Q2 | a: " + myVar2);
@@ -45,4 +50,5 @@
 
   </script>
 </body>
+
 </html>
